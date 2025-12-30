@@ -3,167 +3,638 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>BoxLANG Complete Syntax & Commands</title>
-
+  <title>BoxLANG - Complete Language Reference</title>
   <style>
     :root {
-      --bg: #0d1117;
-      --bg-soft: #161b22;
-      --bg-softer: #1f2630;
+      --bg: #0a0e1a;
+      --bg-soft: #131822;
+      --bg-softer: #1a1f2e;
       --text: #e6edf3;
-      --text-dim: #9da7b3;
+      --text-dim: #8b949e;
       --accent: #58a6ff;
-      --border: #30363d;
-      --code-bg: #0b0f14;
+      --accent-hover: #79c0ff;
+      --border: #21262d;
+      --code-bg: #0d1117;
+      --success: #3fb950;
+      --warning: #d29922;
     }
-    * { box-sizing: border-box; }
-    body { margin:0; padding:0; font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Ubuntu, Cantarell, 'Helvetica Neue', Arial, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
-    a { color: var(--accent); text-decoration: none; }
-    a:hover { text-decoration: underline; }
-    pre, code { font-family: 'JetBrains Mono', Consolas, Monaco, 'Courier New', monospace; }
-    pre { background: var(--code-bg); border: 1px solid var(--border); padding: 1rem; border-radius: 6px; overflow-x: auto; }
-    code { background: rgba(110,118,129,0.15); padding: 0.15em 0.35em; border-radius: 4px; }
-
-    .layout { display: grid; grid-template-columns: 260px 1fr; min-height: 100vh; }
-    aside { background: var(--bg-soft); border-right: 1px solid var(--border); padding: 1.25rem; position: sticky; top: 0; height: 100vh; overflow-y: auto; }
-    .brand { font-weight: bold; font-size: 1.2rem; margin-bottom: 1rem; }
-    nav ul { list-style: none; padding: 0; margin:0; }
-    nav li { margin: 0.35rem 0; }
-    nav a { display:block; padding: 0.4rem 0.6rem; border-radius:6px; color: var(--text-dim); }
-    nav a:hover { background: var(--bg-softer); color: var(--text); }
-
-    main { padding: 2rem 2.5rem; max-width: 1100px; }
-    h1 { font-size: 2.2rem; margin-top:0; }
-    h2 { margin-top: 2.5rem; border-bottom:1px solid var(--border); padding-bottom:0.4rem; }
-    h3 { margin-top:1.5rem; }
-    p { color: var(--text); }
-    table { width:100%; border-collapse: collapse; margin:1rem 0; }
-    th, td { border:1px solid var(--border); padding:0.6rem 0.75rem; text-align:left; }
-    th { background: var(--bg-soft); }
-    footer { margin-top:4rem; padding-top:1.5rem; border-top:1px solid var(--border); color: var(--text-dim); font-size:0.9rem; }
-    .note { background: rgba(88,166,255,0.1); border-left:4px solid var(--accent); padding:0.75rem 1rem; border-radius:6px; margin:1rem 0; }
-    @media (max-width: 900px){ .layout { grid-template-columns:1fr; } aside { height:auto; position: relative; } }
+    
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+    
+    .container {
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      min-height: 100vh;
+    }
+    
+    aside {
+      background: var(--bg-soft);
+      border-right: 1px solid var(--border);
+      padding: 2rem 1.5rem;
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      overflow-y: auto;
+    }
+    
+    .logo {
+      font-size: 1.5rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, var(--accent) 0%, var(--accent-hover) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 0.5rem;
+    }
+    
+    .tagline {
+      color: var(--text-dim);
+      font-size: 0.85rem;
+      margin-bottom: 2rem;
+    }
+    
+    nav ul {
+      list-style: none;
+    }
+    
+    nav li {
+      margin: 0.25rem 0;
+    }
+    
+    nav a {
+      display: block;
+      padding: 0.5rem 0.75rem;
+      color: var(--text-dim);
+      text-decoration: none;
+      border-radius: 6px;
+      transition: all 0.2s;
+      font-size: 0.95rem;
+    }
+    
+    nav a:hover {
+      background: var(--bg-softer);
+      color: var(--text);
+    }
+    
+    main {
+      padding: 3rem 4rem;
+      max-width: 1200px;
+    }
+    
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      background: linear-gradient(135deg, var(--accent) 0%, var(--accent-hover) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    
+    h2 {
+      font-size: 1.8rem;
+      margin-top: 3rem;
+      margin-bottom: 1rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 2px solid var(--border);
+    }
+    
+    h3 {
+      font-size: 1.3rem;
+      margin-top: 2rem;
+      margin-bottom: 0.75rem;
+      color: var(--accent);
+    }
+    
+    p {
+      margin: 1rem 0;
+      color: var(--text-dim);
+    }
+    
+    code {
+      background: var(--code-bg);
+      padding: 0.2rem 0.4rem;
+      border-radius: 4px;
+      font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+      font-size: 0.9em;
+      color: var(--accent-hover);
+    }
+    
+    pre {
+      background: var(--code-bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.25rem;
+      overflow-x: auto;
+      margin: 1.5rem 0;
+      line-height: 1.5;
+    }
+    
+    pre code {
+      background: none;
+      padding: 0;
+      color: var(--text);
+    }
+    
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.5rem 0;
+      background: var(--bg-soft);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    
+    th, td {
+      padding: 0.85rem 1rem;
+      text-align: left;
+      border-bottom: 1px solid var(--border);
+    }
+    
+    th {
+      background: var(--bg-softer);
+      font-weight: 600;
+      color: var(--accent);
+    }
+    
+    tr:last-child td {
+      border-bottom: none;
+    }
+    
+    .note {
+      background: rgba(88, 166, 255, 0.1);
+      border-left: 4px solid var(--accent);
+      padding: 1rem 1.25rem;
+      border-radius: 6px;
+      margin: 1.5rem 0;
+    }
+    
+    .note-title {
+      font-weight: 600;
+      color: var(--accent);
+      margin-bottom: 0.5rem;
+    }
+    
+    .warning {
+      background: rgba(210, 153, 34, 0.1);
+      border-left: 4px solid var(--warning);
+    }
+    
+    .warning .note-title {
+      color: var(--warning);
+    }
+    
+    .example-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+      margin: 1.5rem 0;
+    }
+    
+    .example-card {
+      background: var(--bg-soft);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.25rem;
+    }
+    
+    .example-card h4 {
+      color: var(--accent);
+      margin-bottom: 0.75rem;
+    }
+    
+    footer {
+      margin-top: 4rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--border);
+      color: var(--text-dim);
+      font-size: 0.9rem;
+      text-align: center;
+    }
+    
+    .operator-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+    
+    .operator-card {
+      background: var(--bg-soft);
+      border: 1px solid var(--border);
+      padding: 1rem;
+      border-radius: 6px;
+      text-align: center;
+    }
+    
+    .operator-card code {
+      font-size: 1.2rem;
+      display: block;
+      margin-bottom: 0.5rem;
+    }
+    
+    @media (max-width: 900px) {
+      .container {
+        grid-template-columns: 1fr;
+      }
+      aside {
+        position: relative;
+        height: auto;
+      }
+      main {
+        padding: 2rem 1.5rem;
+      }
+    }
   </style>
 </head>
 <body>
-  <div class="layout">
+  <div class="container">
     <aside>
-      <div class="brand">BoxLANG Docs</div>
+      <div class="logo">BoxLANG</div>
+      <div class="tagline">Simple. Typeless. Powerful.</div>
       <nav>
         <ul>
-          <li><a href="#basic">Basic Syntax Rules</a></li>
-          <li><a href="#boxes">Data Storage - Boxes</a></li>
-          <li><a href="#variables">Variable References</a></li>
-          <li><a href="#say">Output - say</a></li>
-          <li><a href="#ask">Input - ask</a></li>
+          <li><a href="#intro">Introduction</a></li>
+          <li><a href="#syntax">Basic Syntax</a></li>
+          <li><a href="#boxes">Boxes (Variables)</a></li>
+          <li><a href="#references">Variable References</a></li>
+          <li><a href="#say">say - Output</a></li>
+          <li><a href="#ask">ask - Input</a></li>
           <li><a href="#operators">Operators</a></li>
-          <li><a href="#ifelse">Conditionals - if/else</a></li>
-          <li><a href="#while">Loops - while</a></li>
+          <li><a href="#conditionals">if/else</a></li>
+          <li><a href="#loops">while Loops</a></li>
           <li><a href="#comments">Comments</a></li>
-          <li><a href="#examples">Complete Examples</a></li>
+          <li><a href="#examples">Examples</a></li>
         </ul>
       </nav>
     </aside>
 
     <main>
-      <section id="basic">
-        <h1>BoxLANG Complete Syntax & Command Reference</h1>
+      <section id="intro">
+        <h1>BoxLANG Language Reference</h1>
+        <p>BoxLANG is a simple, typeless programming language where data is stored in "boxes". No type declarations needed - everything just works!</p>
+        
+        <div class="note">
+          <div class="note-title">Key Features</div>
+          <ul>
+            <li>✓ Typeless - boxes hold any data</li>
+            <li>✓ Bracket operators for clarity</li>
+            <li>✓ Simple syntax, powerful features</li>
+            <li>✓ Easy to learn and use</li>
+          </ul>
+        </div>
+      </section>
+
+      <section id="syntax">
         <h2>Basic Syntax Rules</h2>
         <ul>
-          <li>Case-insensitive keywords: b, B, box, BOX</li>
-          <li>No semicolons needed; one statement per line</li>
-          <li>Whitespace is flexible</li>
-          <li>Comments start with <code>//</code></li>
-          <li>Block delimiters: <code>"</code> or <code>'</code></li>
+          <li><strong>Case insensitive keywords:</strong> <code>b</code>, <code>B</code>, <code>box</code> all work</li>
+          <li><strong>No semicolons:</strong> One statement per line</li>
+          <li><strong>Flexible whitespace:</strong> Spaces and tabs are flexible</li>
+          <li><strong>Comments:</strong> Use <code>//</code> for rest-of-line comments</li>
+          <li><strong>Block delimiters:</strong> Use <code>"</code> or <code>'</code> (interchangeable)</li>
         </ul>
       </section>
 
       <section id="boxes">
         <h2>Data Storage - Boxes</h2>
-        <p>Boxes hold any type of data; no type declaration required.</p>
-        <pre><code>b name John
-b age 25
-b pi 3.14159
-b isAdult true</code></pre>
+        <p>Boxes are containers that hold any type of data. They're completely typeless!</p>
+        
+        <h3>Creating/Setting Boxes</h3>
+        <pre><code>b boxName value
+box boxName value    // Alternative syntax</code></pre>
+        
+        <h3>Examples</h3>
+        <pre><code>b name John          // String
+b age 25             // Integer
+b pi 3.14159         // Float
+b isAdult true       // Boolean
+b score 100          // Number</code></pre>
+
+        <h3>Deleting Boxes</h3>
+        <pre><code>b boxName            // Blank box auto-deletes</code></pre>
+        
+        <div class="note">
+          <div class="note-title">Auto Types</div>
+          BoxLANG automatically handles: Numbers (<code>25</code>, <code>3.14</code>), Strings (<code>Hello</code>), Booleans (<code>true</code>, <code>false</code>)
+        </div>
       </section>
 
-      <section id="variables">
+      <section id="references">
         <h2>Variable References</h2>
-        <p>Access box value using <code>$</code> prefix.</p>
+        <p>Use the <code>$</code> prefix to access box values.</p>
+        
         <pre><code>b age 25
-b nextAge $age [+] 1
-say $age</code></pre>
+b nextAge $age [+] 1    // nextAge = 26
+say $age                // Outputs: 25</code></pre>
+
+        <h3>Recursive Resolution</h3>
+        <p>Variables can reference other variables:</p>
+        <pre><code>b a 10
+b b $a              // b = 10
+b c $b              // c = 10 (resolves through b to a)</code></pre>
       </section>
 
       <section id="say">
         <h2>Output Command - say</h2>
-        <p>Print text or box values. Use <code>~</code> for space and <code>:</code> for concatenation.</p>
-        <pre><code>say Hello~$name
-say $greeting:$name</code></pre>
+        <p>Prints text and variables to the console.</p>
+        
+        <pre><code>say Hello World
+say $name
+say Hello~$name
+say Your age is~$age~years old</code></pre>
+
+        <h3>Concatenation in say</h3>
+        <table>
+          <tr>
+            <th>Operator</th>
+            <th>Purpose</th>
+            <th>Example</th>
+            <th>Output</th>
+          </tr>
+          <tr>
+            <td><code>~</code></td>
+            <td>Join with space</td>
+            <td><code>Hello~World</code></td>
+            <td>Hello World</td>
+          </tr>
+          <tr>
+            <td><code>:</code></td>
+            <td>Join without space</td>
+            <td><code>Hello:World</code></td>
+            <td>HelloWorld</td>
+          </tr>
+        </table>
+
+        <pre><code>b greeting Hello
+b name John
+say $greeting~$name     // Output: "Hello John"
+say $greeting:$name     // Output: "HelloJohn"</code></pre>
       </section>
 
       <section id="ask">
         <h2>Input Command - ask</h2>
-        <p>Prompt user and store input in a box.</p>
+        <p>Prompts the user for input and stores it in a box.</p>
+        
+        <div class="warning">
+          <div class="note-title">Important</div>
+          The <strong>last word</strong> is always the box name where input is stored.
+        </div>
+
         <pre><code>ask What is your name? name
-ask Enter your age: age</code></pre>
+ask Enter your age: age
+say Hello~$name~you are~$age~years old</code></pre>
       </section>
 
       <section id="operators">
         <h2>Operators</h2>
-        <p>Arithmetic and comparison use brackets.</p>
+        
+        <h3>Arithmetic Operators (Bracket Only)</h3>
+        <p>All math operations use bracket notation:</p>
+        
+        <div class="operator-grid">
+          <div class="operator-card">
+            <code>[+]</code>
+            <div>Addition</div>
+          </div>
+          <div class="operator-card">
+            <code>[-]</code>
+            <div>Subtraction</div>
+          </div>
+          <div class="operator-card">
+            <code>[*]</code>
+            <div>Multiplication</div>
+          </div>
+          <div class="operator-card">
+            <code>[/]</code>
+            <div>Division</div>
+          </div>
+        </div>
+
         <pre><code>b sum $a [+] $b
-b diff $a [-] $b
+b difference $a [-] $b
 b product $a [*] $b
 b quotient $a [/] $b
-b isAdult $age [>=] 18</code></pre>
+
+// Complex expressions (follows order of operations)
+b result 2 [+] 3 [*] 4     // result = 14 (multiply first)</code></pre>
+
+        <h3>Comparison Operators</h3>
+        <table>
+          <tr>
+            <th>Operator</th>
+            <th>Comparison</th>
+            <th>Example</th>
+          </tr>
+          <tr>
+            <td><code>[>]</code></td>
+            <td>Greater than</td>
+            <td><code>$age [>] 17</code></td>
+          </tr>
+          <tr>
+            <td><code>[<]</code></td>
+            <td>Less than</td>
+            <td><code>$age [<] 65</code></td>
+          </tr>
+          <tr>
+            <td><code>[=]</code></td>
+            <td>Equal to</td>
+            <td><code>$age [=] 25</code></td>
+          </tr>
+          <tr>
+            <td><code>[>=]</code></td>
+            <td>Greater or equal</td>
+            <td><code>$age [>=] 18</code></td>
+          </tr>
+          <tr>
+            <td><code>[<=]</code></td>
+            <td>Less or equal</td>
+            <td><code>$age [<=] 100</code></td>
+          </tr>
+          <tr>
+            <td><code>[|]</code></td>
+            <td>Same sign</td>
+            <td><code>-5 [|] -10</code></td>
+          </tr>
+        </table>
+
+        <pre><code>b age 25
+b isAdult $age [>] 17        // true
+b sameSign -5 [|] -10        // true (both negative)
+b diffSign -5 [|] 10         // false (different signs)</code></pre>
       </section>
 
-      <section id="ifelse">
+      <section id="conditionals">
         <h2>Conditionals - if/else</h2>
+        <p>Execute code based on conditions.</p>
+
+        <h3>Basic if Statement</h3>
+        <pre><code>if condition"
+    // code to execute if true
+"</code></pre>
+
+        <h3>if/else Statement</h3>
         <pre><code>if $age [>=] 18"
-  say You are an adult
+    say You are an adult
 else'
-  say You are a minor
+    say You are a minor
 '
 "</code></pre>
+
+        <h3>Nested Conditionals</h3>
+        <pre><code>b score 85
+if $score [>=] 90"
+    say Grade A
+else'
+    if $score [>=] 80"
+        say Grade B
+    else'
+        say Grade C
+    '
+'
+"</code></pre>
+
+        <div class="note">
+          <div class="note-title">Delimiters</div>
+          You can use either <code>"</code> or <code>'</code> as delimiters. They can even be mixed! Each block just needs matching open/close.
+        </div>
       </section>
 
-      <section id="while">
+      <section id="loops">
         <h2>Loops - while</h2>
+        <p>Repeat code while a condition is true.</p>
+
+        <h3>Basic Loop</h3>
         <pre><code>b counter 1
 while $counter [<=] 5"
-  say Count:~$counter
-  b counter $counter [+] 1
+    say Count:~$counter
+    b counter $counter [+] 1
+"</code></pre>
+
+        <h3>Countdown</h3>
+        <pre><code>b num 10
+while $num [>] 0"
+    say $num
+    b num $num [-] 1
+"
+say Blast off!</code></pre>
+
+        <h3>Condition Variable</h3>
+        <pre><code>b keepGoing true
+b count 0
+
+while $keepGoing"
+    say Loop iteration~$count
+    b count $count [+] 1
+    
+    if $count [>=] 3"
+        b keepGoing false
+    "
 "</code></pre>
       </section>
 
       <section id="comments">
         <h2>Comments</h2>
-        <pre><code>// Single line comment
-b age 25  // Inline comment</code></pre>
+        <p>Use <code>//</code> for comments. Everything after <code>//</code> is ignored.</p>
+        
+        <pre><code>// This is a full line comment
+b age 25              // Inline comment
+say Hello World       // Another inline comment
+
+// Multi-line comments need // on each line
+// Like this
+// And this</code></pre>
       </section>
 
       <section id="examples">
         <h2>Complete Examples</h2>
-        <pre><code>// Basic Calculator
-b num1 10
+
+        <div class="example-grid">
+          <div class="example-card">
+            <h4>Calculator</h4>
+            <pre><code>b num1 10
 b num2 5
 b sum $num1 [+] $num2
+b diff $num1 [-] $num2
 say Sum:~$sum
+say Diff:~$diff</code></pre>
+          </div>
 
-// User Age Checker
-ask Enter your age: age
+          <div class="example-card">
+            <h4>Age Checker</h4>
+            <pre><code>ask Enter your age: age
+
 if $age [<] 13"
-  say You are a child
+    say Child
 else'
-  say You are older
+    if $age [<] 20"
+        say Teenager
+    else'
+        say Adult
+    '
 '
 "</code></pre>
+          </div>
+
+          <div class="example-card">
+            <h4>Countdown</h4>
+            <pre><code>b count 10
+
+while $count [>] 0"
+    say $count
+    b count $count [-] 1
+"
+
+say Blast off!</code></pre>
+          </div>
+
+          <div class="example-card">
+            <h4>Guessing Game</h4>
+            <pre><code>b secret 7
+b correct false
+
+while $correct [=] false"
+    ask Guess 1-10: guess
+    
+    if $guess [=] $secret"
+        say Correct!
+        b correct true
+    else'
+        say Wrong!
+    '
+"</code></pre>
+          </div>
+        </div>
+
+        <h3>Multiplication Table</h3>
+        <pre><code>b number 5
+b counter 1
+
+say Table for~$number
+
+while $counter [<=] 10"
+    b result $number [*] $counter
+    say $number~x~$counter~=~$result
+    b counter $counter [+] 1
+"</code></pre>
+
+        <h3>Temperature Converter</h3>
+        <pre><code>ask Enter Celsius: celsius
+
+// Formula: F = C * 9/5 + 32
+b temp $celsius [*] 9
+b temp $temp [/] 5
+b fahrenheit $temp [+] 32
+
+say $celsius~C is~$fahrenheit~F</code></pre>
       </section>
 
       <footer>
-        <p>© 2025 BoxLANG Documentation. All rights reserved.</p>
+        <p>© 2025 BoxLANG Documentation • Simple, Typeless, Powerful</p>
       </footer>
     </main>
   </div>
