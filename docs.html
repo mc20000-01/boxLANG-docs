@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BoxLANG Complete Syntax & Commands</title>
+
+  <style>
+    :root {
+      --bg: #0d1117;
+      --bg-soft: #161b22;
+      --bg-softer: #1f2630;
+      --text: #e6edf3;
+      --text-dim: #9da7b3;
+      --accent: #58a6ff;
+      --border: #30363d;
+      --code-bg: #0b0f14;
+    }
+    * { box-sizing: border-box; }
+    body { margin:0; padding:0; font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Ubuntu, Cantarell, 'Helvetica Neue', Arial, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    pre, code { font-family: 'JetBrains Mono', Consolas, Monaco, 'Courier New', monospace; }
+    pre { background: var(--code-bg); border: 1px solid var(--border); padding: 1rem; border-radius: 6px; overflow-x: auto; }
+    code { background: rgba(110,118,129,0.15); padding: 0.15em 0.35em; border-radius: 4px; }
+
+    .layout { display: grid; grid-template-columns: 260px 1fr; min-height: 100vh; }
+    aside { background: var(--bg-soft); border-right: 1px solid var(--border); padding: 1.25rem; position: sticky; top: 0; height: 100vh; overflow-y: auto; }
+    .brand { font-weight: bold; font-size: 1.2rem; margin-bottom: 1rem; }
+    nav ul { list-style: none; padding: 0; margin:0; }
+    nav li { margin: 0.35rem 0; }
+    nav a { display:block; padding: 0.4rem 0.6rem; border-radius:6px; color: var(--text-dim); }
+    nav a:hover { background: var(--bg-softer); color: var(--text); }
+
+    main { padding: 2rem 2.5rem; max-width: 1100px; }
+    h1 { font-size: 2.2rem; margin-top:0; }
+    h2 { margin-top: 2.5rem; border-bottom:1px solid var(--border); padding-bottom:0.4rem; }
+    h3 { margin-top:1.5rem; }
+    p { color: var(--text); }
+    table { width:100%; border-collapse: collapse; margin:1rem 0; }
+    th, td { border:1px solid var(--border); padding:0.6rem 0.75rem; text-align:left; }
+    th { background: var(--bg-soft); }
+    footer { margin-top:4rem; padding-top:1.5rem; border-top:1px solid var(--border); color: var(--text-dim); font-size:0.9rem; }
+    .note { background: rgba(88,166,255,0.1); border-left:4px solid var(--accent); padding:0.75rem 1rem; border-radius:6px; margin:1rem 0; }
+    @media (max-width: 900px){ .layout { grid-template-columns:1fr; } aside { height:auto; position: relative; } }
+  </style>
+</head>
+<body>
+  <div class="layout">
+    <aside>
+      <div class="brand">BoxLANG Docs</div>
+      <nav>
+        <ul>
+          <li><a href="#basic">Basic Syntax Rules</a></li>
+          <li><a href="#boxes">Data Storage - Boxes</a></li>
+          <li><a href="#variables">Variable References</a></li>
+          <li><a href="#say">Output - say</a></li>
+          <li><a href="#ask">Input - ask</a></li>
+          <li><a href="#operators">Operators</a></li>
+          <li><a href="#ifelse">Conditionals - if/else</a></li>
+          <li><a href="#while">Loops - while</a></li>
+          <li><a href="#comments">Comments</a></li>
+          <li><a href="#examples">Complete Examples</a></li>
+        </ul>
+      </nav>
+    </aside>
+
+    <main>
+      <section id="basic">
+        <h1>BoxLANG Complete Syntax & Command Reference</h1>
+        <h2>Basic Syntax Rules</h2>
+        <ul>
+          <li>Case-insensitive keywords: b, B, box, BOX</li>
+          <li>No semicolons needed; one statement per line</li>
+          <li>Whitespace is flexible</li>
+          <li>Comments start with <code>//</code></li>
+          <li>Block delimiters: <code>"</code> or <code>'</code></li>
+        </ul>
+      </section>
+
+      <section id="boxes">
+        <h2>Data Storage - Boxes</h2>
+        <p>Boxes hold any type of data; no type declaration required.</p>
+        <pre><code>b name John
+b age 25
+b pi 3.14159
+b isAdult true</code></pre>
+      </section>
+
+      <section id="variables">
+        <h2>Variable References</h2>
+        <p>Access box value using <code>$</code> prefix.</p>
+        <pre><code>b age 25
+b nextAge $age [+] 1
+say $age</code></pre>
+      </section>
+
+      <section id="say">
+        <h2>Output Command - say</h2>
+        <p>Print text or box values. Use <code>~</code> for space and <code>:</code> for concatenation.</p>
+        <pre><code>say Hello~$name
+say $greeting:$name</code></pre>
+      </section>
+
+      <section id="ask">
+        <h2>Input Command - ask</h2>
+        <p>Prompt user and store input in a box.</p>
+        <pre><code>ask What is your name? name
+ask Enter your age: age</code></pre>
+      </section>
+
+      <section id="operators">
+        <h2>Operators</h2>
+        <p>Arithmetic and comparison use brackets.</p>
+        <pre><code>b sum $a [+] $b
+b diff $a [-] $b
+b product $a [*] $b
+b quotient $a [/] $b
+b isAdult $age [>=] 18</code></pre>
+      </section>
+
+      <section id="ifelse">
+        <h2>Conditionals - if/else</h2>
+        <pre><code>if $age [>=] 18"
+  say You are an adult
+else'
+  say You are a minor
+'
+"</code></pre>
+      </section>
+
+      <section id="while">
+        <h2>Loops - while</h2>
+        <pre><code>b counter 1
+while $counter [<=] 5"
+  say Count:~$counter
+  b counter $counter [+] 1
+"</code></pre>
+      </section>
+
+      <section id="comments">
+        <h2>Comments</h2>
+        <pre><code>// Single line comment
+b age 25  // Inline comment</code></pre>
+      </section>
+
+      <section id="examples">
+        <h2>Complete Examples</h2>
+        <pre><code>// Basic Calculator
+b num1 10
+b num2 5
+b sum $num1 [+] $num2
+say Sum:~$sum
+
+// User Age Checker
+ask Enter your age: age
+if $age [<] 13"
+  say You are a child
+else'
+  say You are older
+'
+"</code></pre>
+      </section>
+
+      <footer>
+        <p>© 2025 BoxLANG Documentation. All rights reserved.</p>
+      </footer>
+    </main>
+  </div>
+</body>
+</html>
